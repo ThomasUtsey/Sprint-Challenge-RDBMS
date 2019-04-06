@@ -14,7 +14,20 @@ const db = knex(knexConfig)
 const errors = { 
   '19':'Another entree has the same value no duplicates'
 }
-
+router.post('/',async (req, res) => {
+  try {
+    const [id] = await db('project').insert(req.body);
+    const result = await db('project')
+    .where({id})
+    .first()
+    res.status(201).json(result);
+  } catch (error) {
+    // log error to database
+    const message = errors[error.errno] || 'Retry different value server error';
+    res.status(500).json({message, error});
+  }
+  
+})
 
 
 router.get('/', async (req, res)=>{

@@ -7,6 +7,12 @@ exports.up = function(knex) {
        .notNullable()
        .unique();
 
+    tbl.string ('description',128)
+       .notNullable()
+
+    tbl.boolean('flag')
+       .notNullable()
+
     
   })
 };

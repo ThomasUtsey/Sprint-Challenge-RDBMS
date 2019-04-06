@@ -3,11 +3,18 @@ exports.up = function(knex) {
   return knex.schema.createTable('action', (tbl)=>{
     tbl.increments();//primary key command defaults as ID
 
-    tbl.string('name',128)
+    tbl.string('todo',128)
        .notNullable()
        .unique();
 
-       tbl.integer('projectID')
+    tbl.string('notes',128)
+       .notNullable()
+       .unique();
+
+    tbl.boolean('flag')
+      .notNullable()
+
+    tbl.integer('projectID')
        .references('ID')
        .inTable('project')
   
