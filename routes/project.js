@@ -57,11 +57,15 @@ router.get('/:id', async (req, res)=>{
 
  const result = await db('project').where({ id: req.params.id }).first();
  const act = await db('action').where({projectID:req.params.id});
- const info = ({result,act})
+ const info = {
+   result:result,
+  actin:{...act}
+ }
+ 
    
  if(result){
 
- res.status(200).json(info)
+ res.status(200).json({info})
  }else{
   res.status(404).json({message: 'Records not found'})
  }
